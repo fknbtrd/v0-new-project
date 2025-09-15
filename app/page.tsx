@@ -67,28 +67,47 @@ export default function LiderBetonPage() {
       title: "Доставка собственным транспортом",
       icon: ({ className }: { className?: string }) => (
         <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          {/* Truck cab */}
-          <path d="M2 14h2v2H2v-2zm0-2h2v2H2v-2zm0-2h2v2H2v-2zm0-2h2v2H2v-2z" />
-          <path d="M4 8h4v8H4V8z" />
+          <rect x="15" y="8" width="8" height="8" rx="0.5" />
 
-          {/* Concrete mixer drum - main body */}
-          <ellipse cx="14" cy="12" rx="6" ry="4" />
-          <path d="M8 12c0-2.2 2.7-4 6-4s6 1.8 6 4" />
-          <path d="M8 12c0 2.2 2.7 4 6 4s6-1.8 6-4" />
+          {/* Windshield */}
+          <rect x="15.5" y="8.5" width="7" height="2.5" fill="white" opacity="0.2" />
 
-          {/* Mixer drum details */}
-          <path d="M10 10l8 4M10 14l8-4" />
-          <circle cx="14" cy="12" r="1" />
+          <ellipse cx="10" cy="12" rx="6" ry="4" transform="rotate(35 10 12)" />
 
-          {/* Wheels */}
+          {/* Mixer drum ridges/segments - characteristic spiral lines */}
+          <path
+            d="M5 10c2 1 4 2 6 3M6 8c2 1.5 4 3 6 4.5M7 14c2-1 4-2 6-3"
+            stroke="white"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.3"
+            transform="rotate(35 10 12)"
+          />
+
+          {/* Support frame under mixer */}
+          <rect x="4" y="15" width="15" height="1" />
+          <rect x="6" y="14" width="1" height="2" />
+          <rect x="14" y="14" width="1" height="2" />
+
+          {/* Three wheels - two left wheels close together, one right wheel */}
+          {/* Left wheels close together as specified */}
           <circle cx="5" cy="18" r="2" />
-          <circle cx="16" cy="18" r="2" />
-          <circle cx="5" cy="18" r="1" fill="white" />
-          <circle cx="16" cy="18" r="1" fill="white" />
+          <circle cx="8" cy="18" r="2" />
+          {/* Right wheel under cab */}
+          <circle cx="19" cy="18" r="2" />
 
-          {/* Truck frame */}
-          <path d="M4 16h12v2H4v-2z" />
-          <path d="M8 12h2v4H8v-4z" />
+          {/* Wheel rims */}
+          <circle cx="5" cy="18" r="1.2" fill="white" opacity="0.3" />
+          <circle cx="8" cy="18" r="1.2" fill="white" opacity="0.3" />
+          <circle cx="19" cy="18" r="1.2" fill="white" opacity="0.3" />
+
+          {/* Wheel centers */}
+          <circle cx="5" cy="18" r="0.5" fill="currentColor" />
+          <circle cx="8" cy="18" r="0.5" fill="currentColor" />
+          <circle cx="19" cy="18" r="0.5" fill="currentColor" />
+
+          {/* Connecting chassis */}
+          <rect x="3" y="17" width="19" height="0.8" />
         </svg>
       ),
       description:
@@ -285,17 +304,17 @@ export default function LiderBetonPage() {
             <img
               src="/images/lider-beton-logo-new.png"
               alt="Лидер Бетон - Производство бетона в Каневской"
-              className="h-24 md:h-32 w-auto"
+              className="h-22 md:h-32 w-auto"
             />
-            <h1 className="text-2xl sm:text-4xl md:text-8xl font-bold text-balance drop-shadow-lg leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-8xl font-bold text-balance drop-shadow-lg leading-tight">
               ЛИДЕР БЕТОН
             </h1>
           </div>
-          <p className="text-lg md:text-3xl mb-2 max-w-4xl mx-auto text-pretty leading-relaxed drop-shadow-md font-bold">
+          <p className="text-base md:text-2xl mb-2 max-w-4xl text-pretty leading-relaxed drop-shadow-md font-bold text-center mx-auto">
             Ведущий производитель бетона для тех, кто ценит качество
           </p>
 
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white bg-black/50 backdrop-blur-sm rounded-lg px-6 py-3 inline-block shadow-lg">
+          <h3 className="text-xl md:text-3xl font-bold mb-4 text-white bg-black/50 backdrop-blur-sm rounded-lg px-6 py-3 inline-block shadow-lg">
             Информация о нас
           </h3>
 
@@ -441,7 +460,7 @@ export default function LiderBetonPage() {
           <div className="bg-background rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-bold text-primary">
+                <h3 className="text-xl font-bold text-primary">
                   {advantages.find((a) => a.id === selectedAdvantage)?.title}
                 </h3>
                 <button
