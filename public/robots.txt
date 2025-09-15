@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://betonlider360.ru/sitemap.xml
+
+# Crawl-delay для предотвращения перегрузки сервера
+Crawl-delay: 1
+
+# Разрешить индексацию всех страниц
+Allow: /
+Allow: /images/
+Allow: /favicon.ico
