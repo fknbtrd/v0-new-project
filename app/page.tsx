@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Phone, Mail, MapPin, Clock, Truck, Factory, Shield, DollarSign, X } from "lucide-react"
+import { Phone, Mail, MapPin, Clock, Factory, DollarSign, X } from "lucide-react"
 import Head from "next/head"
 
 export default function LiderBetonPage() {
@@ -45,7 +45,13 @@ export default function LiderBetonPage() {
     {
       id: "gost",
       title: "Соблюдение требований и норм ГОСТа",
-      icon: Shield,
+      icon: ({ className }: { className?: string }) => (
+        <div
+          className={`${className} flex items-center justify-center font-bold text-xs bg-accent text-white rounded px-1`}
+        >
+          ГОСТ
+        </div>
+      ),
       description:
         "Все смеси сертифицированы. Аттестованная лаборатория осуществляет контроль качества продукции. Благодаря профессионализму специалистов достигается высочайший уровень технологий, позволяющий получать композиционный материал с заранее заданными уникальными свойствами. Экспертная группа завода тщательно подходят к выбору сырья и химических добавок, предоставляющих возможность производить бетон самого высокого качества.",
     },
@@ -57,9 +63,34 @@ export default function LiderBetonPage() {
         "Благодаря закупке сырья напрямую с заводов изготовителей, а также наличию собственного автопарка, своим клиентам мы предлагаем продукцию самого высокого качества по доступной цене.",
     },
     {
-      id: "delivery-pumps",
-      title: "Доставка собственными бетононасосами",
-      icon: Truck,
+      id: "delivery-transport",
+      title: "Доставка собственным транспортом",
+      icon: ({ className }: { className?: string }) => (
+        <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          {/* Truck cab */}
+          <path d="M2 14h2v2H2v-2zm0-2h2v2H2v-2zm0-2h2v2H2v-2zm0-2h2v2H2v-2z" />
+          <path d="M4 8h4v8H4V8z" />
+
+          {/* Concrete mixer drum - main body */}
+          <ellipse cx="14" cy="12" rx="6" ry="4" />
+          <path d="M8 12c0-2.2 2.7-4 6-4s6 1.8 6 4" />
+          <path d="M8 12c0 2.2 2.7 4 6 4s6-1.8 6-4" />
+
+          {/* Mixer drum details */}
+          <path d="M10 10l8 4M10 14l8-4" />
+          <circle cx="14" cy="12" r="1" />
+
+          {/* Wheels */}
+          <circle cx="5" cy="18" r="2" />
+          <circle cx="16" cy="18" r="2" />
+          <circle cx="5" cy="18" r="1" fill="white" />
+          <circle cx="16" cy="18" r="1" fill="white" />
+
+          {/* Truck frame */}
+          <path d="M4 16h12v2H4v-2z" />
+          <path d="M8 12h2v4H8v-4z" />
+        </svg>
+      ),
       description:
         "Собственный автопарк новых импортных АБС (автобетоносмесителей) позволяет нам доставлять бетон заказчику (до 90 км.) с сохранением его качественных характеристик. Собственные бетонососы (26-52м.) позволяют перекачать большой объём бетона за короткий срок в стесненных условиях. Благодаря этому наши клиенты экономят время и деньги на укладке бетона.",
     },
@@ -132,7 +163,7 @@ export default function LiderBetonPage() {
       "Производство и доставка бетона всех марок в Каневской. Бетонный завод с собственным автопарком миксеров и бетонососов.",
     url: "https://lider-beton.vercel.app",
     telephone: "+7-918-360-10-10",
-    email: "fknbtrd@gmail.com",
+    email: "lider360@bk.ru",
     address: {
       "@type": "PostalAddress",
       streetAddress: "ул. Широкая, д. 247",
@@ -144,7 +175,7 @@ export default function LiderBetonPage() {
       latitude: "46.0833",
       longitude: "38.9167",
     },
-    openingHours: "Mo-Fr 08:00-18:00",
+    openingHours: "Mo-Sa 08:00-18:00",
     priceRange: "$$",
     areaServed: "Каневская и окрестности до 90 км",
     serviceType: "Производство и доставка бетона",
@@ -201,7 +232,7 @@ export default function LiderBetonPage() {
               <img
                 src="/images/lider-beton-logo-header.png"
                 alt="Лидер Бетон - Бетонный завод в Каневской"
-                className="h-5 md:h-10 w-auto"
+                className="h-6 md:h-8 w-auto"
               />
             </div>
             <div className="hidden md:flex space-x-6">
@@ -211,13 +242,6 @@ export default function LiderBetonPage() {
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 Главная
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollToSection("advantages")}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Преимущества
               </button>
               <button
                 type="button"
@@ -233,15 +257,9 @@ export default function LiderBetonPage() {
               >
                 Контакты
               </button>
-              <button
-                type="button"
-                onClick={() => scrollToSection("map")}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Карта
-              </button>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-accent" />
               <a
                 href="tel:89183601010"
                 className="text-accent font-semibold hover:text-accent/80 transition-colors text-sm md:text-base whitespace-nowrap"
@@ -267,11 +285,13 @@ export default function LiderBetonPage() {
             <img
               src="/images/lider-beton-logo-new.png"
               alt="Лидер Бетон - Производство бетона в Каневской"
-              className="h-16 md:h-20 w-auto"
+              className="h-24 md:h-32 w-auto"
             />
-            <h1 className="text-2xl md:text-6xl font-bold text-balance drop-shadow-lg">ЛИДЕР БЕТОН</h1>
+            <h1 className="text-2xl sm:text-4xl md:text-8xl font-bold text-balance drop-shadow-lg leading-tight">
+              ЛИДЕР БЕТОН
+            </h1>
           </div>
-          <p className="text-xl md:text-2xl mb-2 max-w-4xl mx-auto text-pretty leading-relaxed drop-shadow-md">
+          <p className="text-lg md:text-3xl mb-2 max-w-4xl mx-auto text-pretty leading-relaxed drop-shadow-md font-bold">
             Ведущий производитель бетона для тех, кто ценит качество
           </p>
 
@@ -315,7 +335,11 @@ export default function LiderBetonPage() {
                 >
                   <CardHeader>
                     <div className="mx-auto w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                      <IconComponent className="h-8 w-8 text-accent" />
+                      {typeof IconComponent === "function" ? (
+                        <IconComponent className="h-8 w-8 text-accent" />
+                      ) : (
+                        <IconComponent className="h-8 w-8 text-accent" />
+                      )}
                     </div>
                     <CardTitle className="text-xl">{advantage.title}</CardTitle>
                   </CardHeader>
@@ -447,6 +471,7 @@ export default function LiderBetonPage() {
               <div>
                 <h3 className="text-xl font-semibold mb-6">Свяжитесь с нами</h3>
                 <form action="https://formspree.io/f/xldwkrql" method="POST" className="space-y-4">
+                  <input type="hidden" name="_to" value="lider360@bk.ru" />
                   <div>
                     <Label htmlFor="name">Имя</Label>
                     <Input id="name" name="name" type="text" required placeholder="Ваше имя" />
@@ -491,10 +516,10 @@ export default function LiderBetonPage() {
                     <div>
                       <h4 className="font-semibold text-lg">Email</h4>
                       <a
-                        href="mailto:fknbtrd@gmail.com"
+                        href="mailto:lider360@bk.ru"
                         className="text-accent hover:text-accent/80 transition-colors text-lg"
                       >
-                        fknbtrd@gmail.com
+                        lider360@bk.ru
                       </a>
                     </div>
                   </div>
@@ -505,7 +530,7 @@ export default function LiderBetonPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg">Режим работы</h4>
-                      <p className="text-muted-foreground">Пн-Пт: 8:00 - 18:00</p>
+                      <p className="text-muted-foreground">Пн - Сб: 8:00 - 18:00</p>
                     </div>
                   </div>
 
