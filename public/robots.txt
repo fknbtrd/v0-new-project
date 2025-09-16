@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://betonlider360.ru/sitemap.xml
+Sitemap: https://liderbeton360.ru/sitemap.xml
 
 # Crawl-delay для предотвращения перегрузки сервера
 Crawl-delay: 1
