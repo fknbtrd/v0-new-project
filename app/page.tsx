@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,12 +14,53 @@ import Head from "next/head"
 export default function LiderBetonPage() {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     message: "",
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+
   const [selectedAdvantage, setSelectedAdvantage] = useState<string | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const form = e.currentTarget
+      const formData = new FormData(form)
+
+      const response = await fetch("https://formspree.io/f/xldwkrql", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        form.reset()
+        setFormData({ name: "", email: "", phone: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -489,46 +532,100 @@ export default function LiderBetonPage() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-semibold mb-6">Свяжитесь с нами</h3>
-                <form action="https://formspree.io/f/xldwkrql" method="POST" className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <input type="hidden" name="_to" value="lider360@bk.ru" />
+                  <input type="hidden" name="_subject" value="Новая заявка с сайта Лидер Бетон" />
+                  <input type="hidden" name="_next" value="https://lider-beton.vercel.app" />
                   <div>
-                    <Label htmlFor="name">Имя</Label>
-                    <Input id="name" name="name" type="text" required placeholder="Ваше имя" />
+                    <Label htmlFor="name">Имя *</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Ваше имя"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      autoComplete="name"
+                    />
                   </div>
                   <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" required placeholder="your@email.com" />
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      autoComplete="email"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="phone">Телефон</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" />
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="+7 (___) ___-__-__"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      autoComplete="tel"
+                    />
                   </div>
                   <div>
-                    <Label htmlFor="message">Сообщение</Label>
-                    <Textarea id="message" name="message" placeholder="Ваш комментарий или вопрос" rows={4} required />
+                    <Label htmlFor="message">Сообщение *</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      placeholder="Ваш комментарий или вопрос"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={handleInputChange}
+                    />
                   </div>
+
+                  {submitStatus === "success" && (
+                    <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                      Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.
+                    </div>
+                  )}
+
+                  {submitStatus === "error" && (
+                    <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                      Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам напрямую.
+                    </div>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     style={{
                       width: "100%",
                       padding: "12px 24px",
-                      backgroundColor: "#1e40af",
+                      backgroundColor: isSubmitting ? "#9ca3af" : "#1e40af",
                       color: "#ffffff",
                       border: "none",
                       borderRadius: "6px",
                       fontSize: "14px",
                       fontWeight: "500",
-                      cursor: "pointer",
+                      cursor: isSubmitting ? "not-allowed" : "pointer",
                       transition: "background-color 0.2s ease",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#1d4ed8"
+                      if (!isSubmitting) {
+                        e.currentTarget.style.backgroundColor = "#1d4ed8"
+                      }
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "#1e40af"
+                      if (!isSubmitting) {
+                        e.currentTarget.style.backgroundColor = "#1e40af"
+                      }
                     }}
                   >
-                    Отправить сообщение
+                    {isSubmitting ? "Отправляется..." : "Отправить сообщение"}
                   </button>
                 </form>
               </div>
