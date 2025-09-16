@@ -507,9 +507,29 @@ export default function LiderBetonPage() {
                     <Label htmlFor="message">Сообщение</Label>
                     <Textarea id="message" name="message" placeholder="Ваш комментарий или вопрос" rows={4} required />
                   </div>
-                  <Button type="submit" className="w-full">
+                  <button
+                    type="submit"
+                    style={{
+                      width: "100%",
+                      padding: "12px 24px",
+                      backgroundColor: "#1e40af",
+                      color: "#ffffff",
+                      border: "none",
+                      borderRadius: "6px",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      cursor: "pointer",
+                      transition: "background-color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#1d4ed8"
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#1e40af"
+                    }}
+                  >
                     Отправить сообщение
-                  </Button>
+                  </button>
                 </form>
               </div>
 
@@ -576,19 +596,19 @@ export default function LiderBetonPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-card rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3A72227188635&amp;source=constructor&ll=39.017399%2C46.078879&z=16&pt=39.017399,46.078879,pm2rdm"
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A72227188635&amp;source=constructor&ll=39.017399%2C46.078879&z=16&pt=39.017399,46.078879,pm2rdm&text=%D0%9B%D0%98%D0%94%D0%95%D0%A0%20%D0%91%D0%95%D0%A2%D0%9E%D0%9D"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                title="Карта расположения Лидер Бетон"
+                title="Карта расположения Лидер Бетон - производство бетона"
               />
             </div>
             <div className="text-center mt-6">
               <p className="text-muted-foreground flex items-center justify-center">
                 <MapPin className="mr-2 h-5 w-5" />
-                Россия, ст. Каневская, ул. Широкая, д. 247
+                ЛИДЕР БЕТОН - Россия, ст. Каневская, ул. Широкая, д. 247
               </p>
             </div>
           </div>
