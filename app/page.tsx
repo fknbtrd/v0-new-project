@@ -109,49 +109,7 @@ export default function LiderBetonPage() {
       id: "delivery-transport",
       title: "Доставка собственным транспортом",
       icon: ({ className }: { className?: string }) => (
-        <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <rect x="15" y="8" width="8" height="8" rx="0.5" />
-
-          {/* Windshield */}
-          <rect x="15.5" y="8.5" width="7" height="2.5" fill="white" opacity="0.2" />
-
-          <ellipse cx="10" cy="12" rx="6" ry="4" transform="rotate(35 10 12)" />
-
-          {/* Mixer drum ridges/segments - characteristic spiral lines */}
-          <path
-            d="M5 10c2 1 4 2 6 3M6 8c2 1.5 4 3 6 4.5M7 14c2-1 4-2 6-3"
-            stroke="white"
-            strokeWidth="0.8"
-            fill="none"
-            opacity="0.3"
-            transform="rotate(35 10 12)"
-          />
-
-          {/* Support frame under mixer */}
-          <rect x="4" y="15" width="15" height="1" />
-          <rect x="6" y="14" width="1" height="2" />
-          <rect x="14" y="14" width="1" height="2" />
-
-          {/* Three wheels - two left wheels close together, one right wheel */}
-          {/* Left wheels close together as specified */}
-          <circle cx="5" cy="18" r="2" />
-          <circle cx="8" cy="18" r="2" />
-          {/* Right wheel under cab */}
-          <circle cx="19" cy="18" r="2" />
-
-          {/* Wheel rims */}
-          <circle cx="5" cy="18" r="1.2" fill="white" opacity="0.3" />
-          <circle cx="8" cy="18" r="1.2" fill="white" opacity="0.3" />
-          <circle cx="19" cy="18" r="1.2" fill="white" opacity="0.3" />
-
-          {/* Wheel centers */}
-          <circle cx="5" cy="18" r="0.5" fill="currentColor" />
-          <circle cx="8" cy="18" r="0.5" fill="currentColor" />
-          <circle cx="19" cy="18" r="0.5" fill="currentColor" />
-
-          {/* Connecting chassis */}
-          <rect x="3" y="17" width="19" height="0.8" />
-        </svg>
+        <img src="/images/concrete-mixer-icon.png" alt="Бетономешалка" className={`${className} object-contain`} />
       ),
       description:
         "Собственный автопарк новых импортных АБС (автобетоносмесителей) позволяет нам доставлять бетон заказчику (до 90 км.) с сохранением его качественных характеристик. Собственные бетонососы (26-52м.) позволяют перекачать большой объём бетона за короткий срок в стесненных условиях. Благодаря этому наши клиенты экономят время и деньги на укладке бетона.",
@@ -341,7 +299,9 @@ export default function LiderBetonPage() {
             backgroundImage: "url('/images/concrete-plant-bg-new.jpg')",
           }}
         />
-        <div className="absolute inset-0 bg-blue-900/60" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-blue-900/60 md:mx-32 md:my-40 md:border-4 md:border-blue-800" />
+        </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="flex items-center justify-center mb-6 gap-4">
             <img
@@ -349,7 +309,14 @@ export default function LiderBetonPage() {
               alt="Лидер Бетон - Производство бетона в Каневской"
               className="h-22 md:h-32 w-auto"
             />
-            <h1 className="text-3xl sm:text-5xl md:text-8xl font-bold text-balance drop-shadow-lg leading-tight">
+            <h1
+              className="text-3xl sm:text-5xl md:text-8xl font-bold text-balance drop-shadow-lg leading-tight"
+              style={{
+                filter:
+                  "drop-shadow(2px 2px 0px #1e3a8a) drop-shadow(-2px -2px 0px #1e3a8a) drop-shadow(2px -2px 0px #1e3a8a) drop-shadow(-2px 2px 0px #1e3a8a)",
+                textShadow: "0 0 8px rgba(30, 58, 138, 0.5)",
+              }}
+            >
               ЛИДЕР БЕТОН
             </h1>
           </div>
@@ -362,9 +329,9 @@ export default function LiderBetonPage() {
           </h3>
 
           <p className="text-base md:text-lg mb-8 max-w-4xl mx-auto text-pretty leading-relaxed drop-shadow-md">
-            Производственная компания «ЛИДЕР» является производителем бетонных смесей, ориентированным на строительный
-            рынок Каневского района + 90 км. Мы предлагаем качественный бетон на выгодных условиях, долгосрочное
-            сотрудничество и гарантию качества всей поставляемой продукции.
+            Компания «ЛИДЕР» является производителем бетонных смесей, ориентированным на строительный рынок Каневского
+            района + 90 км. Мы предлагаем качественный бетон на выгодных условиях, долгосрочное сотрудничество и
+            гарантию качества всей поставляемой продукции.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -432,7 +399,7 @@ export default function LiderBetonPage() {
                 className="text-center hover:shadow-lg transition-shadow cursor-pointer flex flex-col h-full"
               >
                 <CardHeader>
-                  <div className="mx-auto w-16 h-16 rounded-lg overflow-hidden mb-4 bg-gray-100 flex items-center justify-center">
+                  <div className="mx-auto w-32 h-32 rounded-lg overflow-hidden mb-4 bg-gray-100 flex items-center justify-center">
                     <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.title}
